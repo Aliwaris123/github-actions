@@ -37,7 +37,7 @@ env:
   ECS_CLUSTER: Giithub-actions               # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: git-action-task # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: MY_CONTAINER_NAME           # set this to the name of the container in the
+  CONTAINER_NAME: git-container           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
 
 permissions:
@@ -56,8 +56,8 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ AKIAQKGGXLYGMWLGCZTY }}
-        aws-secret-access-key: ${{ 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 }}
+        aws-access-key-id: ${{ AKIAQKGGXLYGIB2QOM54 }}
+        aws-secret-access-key: ${{ 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 }}
         aws-region: ${{ env.us-east-1 }}
 
     - name: Login to Amazon ECR
@@ -81,14 +81,14 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ${{ env.ECS_TASK_DEFINITION }}
-        container-name: ${{ env.CONTAINER_NAME }}
+        task-definition: ${{ env.arn:aws:ecs:us-east-1:021891603980:task-definition/git-action-task:1 }}
+        container-name: ${{ env.git-container }}
         image: ${{ steps.build-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: ${{ env.ECS_SERVICE }}
-        cluster: ${{ env.ECS_CLUSTER }}
+        service: ${{ env.Draining }}
+        cluster: ${{ env.arn:aws:ecs:us-east-1:021891603980:cluster/Giithub-actions }}
         wait-for-service-stability: true

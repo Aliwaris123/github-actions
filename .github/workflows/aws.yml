@@ -67,8 +67,8 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        IMAGE_TAG: ${{ github.sha }}
+        ECR_REGISTRY: 021891603980.dkr.ecr.us-east-1.amazonaws.com/github-actions
+        IMAGE_TAG: Git-action-image
       run: |
         # Build a docker container and
         # push it to ECR so that it can
@@ -83,12 +83,12 @@ jobs:
       with:
         task-definition: env.arn:aws:ecs:us-east-1:021891603980:task-definition/git-action-task:1
         container-name: git-container
-        image: ${{ steps.build-image.outputs.image }}
+        image: 021891603980.dkr.ecr.us-east-1.amazonaws.com/docker:latest
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        task-definition: arn:aws:ecs:us-east-1:021891603980:task-definition/git-action-task:1
         service: Draining
         cluster: env.arn:aws:ecs:us-east-1:021891603980:cluster/Giithub-actions
         wait-for-service-stability: true

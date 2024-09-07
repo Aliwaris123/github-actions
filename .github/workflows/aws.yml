@@ -56,9 +56,9 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ AKIAQKGGXLYGIB2QOM54 }}
-        aws-secret-access-key: ${{ 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 }}
-        aws-region: ${{ env.us-east-1 }}
+        aws-access-key-id: AKIAQKGGXLYGIB2QOM54
+        aws-secret-access-key: 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
+        aws-region: us-east-1
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -81,14 +81,14 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ${{ env.arn:aws:ecs:us-east-1:021891603980:task-definition/git-action-task:1 }}
-        container-name: ${{ env.git-container }}
+        task-definition: env.arn:aws:ecs:us-east-1:021891603980:task-definition/git-action-task:1
+        container-name: git-container
         image: ${{ steps.build-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: ${{ env.Draining }}
-        cluster: ${{ env.arn:aws:ecs:us-east-1:021891603980:cluster/Giithub-actions }}
+        service: Draining
+        cluster: env.arn:aws:ecs:us-east-1:021891603980:cluster/Giithub-actions
         wait-for-service-stability: true

@@ -32,7 +32,7 @@ on:
 
 env:
   AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: docker          # set this to your Amazon ECR repository name
+  ECR_REPOSITORY: github-actions          # set this to your Amazon ECR repository name
   ECS_SERVICE: Draining                 # set this to your Amazon ECS service name
   ECS_CLUSTER: Giithub-actions               # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: git-action-task # set this to the path to your Amazon ECS task definition
@@ -67,7 +67,7 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        ECR_REGISTRY: 021891603980.dkr.ecr.us-east-1.amazonaws.com/docker
+        ECR_REGISTRY: 021891603980.dkr.ecr.us-east-1.amazonaws.com/github-actions
         IMAGE_TAG: Git-action-image
       run: |
         # Build a docker container and

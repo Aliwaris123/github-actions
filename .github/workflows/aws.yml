@@ -89,7 +89,7 @@ jobs:
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: arn:aws:ecs:us-east-1:021891603980:task-definition/git-action-task:1
-        service: arn:aws:ecs:us-east-1:021891603980:service/Giithub-actions/Git-task
-        cluster: arn:aws:ecs:us-east-1:021891603980:cluster/Giithub-actions
+        task-definition: git-action-task:1.json
+        service: Git-task
+        cluster: Giithub-actions
         wait-for-service-stability: true

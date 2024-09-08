@@ -82,7 +82,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: arn:aws:ecs:us-east-1:021891603980:task-definition/git-action-task:1
+        task-definition: git-action-task:1.json
         container-name: git-container
         image: 021891603980.dkr.ecr.us-east-1.amazonaws.com/docker:latest
 
